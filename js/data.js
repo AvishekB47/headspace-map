@@ -13,3 +13,4 @@ export const CATEGORY_MAP = {
 
 export const DATA = [];
 export const POPPING = [];
+export const ALL_TASKS = [];

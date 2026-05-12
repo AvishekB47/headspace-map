@@ -1,4 +1,4 @@
-import { DATA, CATEGORY_MAP } from "./data.js";
+import { DATA, ALL_TASKS, CATEGORY_MAP } from "./data.js";
 
 export async function loadTodoistTasks(apiToken) {
   const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
@@ -20,6 +20,11 @@ export async function loadTodoistTasks(apiToken) {
   const cutoffStr = cutoff.toISOString().slice(0, 10);
 
   const parentIds = new Set(tasks.map(t => t.parent_id).filter(Boolean));
+
+  ALL_TASKS.length = 0;
+  for (const task of tasks) {
+    ALL_TASKS.push({ id: task.id, label: task.content });
+  }
 
   DATA.length = 0;
   for (const task of tasks) {

@@ -1,3 +1,5 @@
+import { ALL_TASKS } from "./data.js";
+
 export function attachAddTask(apiToken, onSuccess) {
   const dialog    = document.getElementById("at-dialog");
   const openBtn   = document.getElementById("at-open-btn");
@@ -6,6 +8,7 @@ export function attachAddTask(apiToken, onSuccess) {
   const content   = document.getElementById("at-content");
   const category  = document.getElementById("at-category");
   const priority  = document.getElementById("at-priority");
+  const parent    = document.getElementById("at-parent");
   const due       = document.getElementById("at-due");
   const status    = document.getElementById("at-status");
 
@@ -14,6 +17,15 @@ export function attachAddTask(apiToken, onSuccess) {
     due.value = "";
     status.textContent = "";
     submitBtn.disabled = false;
+
+    parent.innerHTML = '<option value="">— none —</option>';
+    for (const task of ALL_TASKS) {
+      const opt = document.createElement("option");
+      opt.value = task.id;
+      opt.textContent = task.label.length > 36 ? task.label.slice(0, 36) + "…" : task.label;
+      parent.appendChild(opt);
+    }
+
     dialog.classList.remove("hidden");
     content.focus();
   }
@@ -44,6 +56,7 @@ export function attachAddTask(apiToken, onSuccess) {
       labels: [category.value]
     };
     if (due.value) body.due_date = due.value;
+    if (parent.value) body.parent_id = parent.value;
 
     try {
       const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
