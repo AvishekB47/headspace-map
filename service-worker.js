@@ -1,4 +1,4 @@
-const CACHE = 'headspace-v1';
+const CACHE = 'headspace-v3';
 const ASSETS = [
   '.',
   'index.html',
@@ -35,13 +35,15 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
-  // Network-first for Todoist API and Google Fonts
-  if (url.hostname.includes('todoist') || url.hostname.includes('google')) {
-    e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
+  // Cache-only for the icon (never changes)
+  if (url.pathname.endsWith('.png') || url.pathname.endsWith('.ico')) {
+    e.respondWith(
+      caches.match(e.request).then(cached => cached || fetch(e.request))
+    );
     return;
   }
-  // Cache-first for all local assets
+  // Network-first for everything else (JS, CSS, HTML, APIs)
   e.respondWith(
-    caches.match(e.request).then(cached => cached || fetch(e.request))
+    fetch(e.request).catch(() => caches.match(e.request))
   );
 });
