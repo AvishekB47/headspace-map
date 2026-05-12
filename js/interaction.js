@@ -154,7 +154,9 @@ async function popBubble(d) {
   physicsStopTimer = setTimeout(() => fadeStopPhysics(CONFIG.physics.fadeDuration), 500);
 
   try {
-    await fetch(`https://api.todoist.com/api/v1/tasks/${d.id}/close`, {
+    const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+    const closeUrl = isLocal ? `/proxy/tasks/${d.id}/close` : `https://api.todoist.com/api/v1/tasks/${d.id}/close`;
+    await fetch(closeUrl, {
       method: "POST",
       headers: { "Authorization": `Bearer ${CONFIG.todoist.apiToken}` }
     });

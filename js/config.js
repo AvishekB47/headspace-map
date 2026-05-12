@@ -42,7 +42,7 @@ export const CONFIG = {
     containerStroke: "rgba(255,255,255,0.10)",
     bubbleAlpha: 0.85,
     draggedBubbleAlpha: 0.65,
-    labelFill: "rgba(230,225,215,0.82)",
-    draggedLabelFill: "rgba(255,250,240,0.95)"
+    labelFill: "#1a1a24",
+    draggedLabelFill: "#1a1a24"
   }
 };

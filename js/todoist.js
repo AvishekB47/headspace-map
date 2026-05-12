@@ -1,7 +1,9 @@
 import { DATA, CATEGORY_MAP } from "./data.js";
 
 export async function loadTodoistTasks(apiToken) {
-  const res = await fetch("https://api.todoist.com/api/v1/tasks", {
+  const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+  const tasksUrl = isLocal ? '/proxy/tasks' : 'https://api.todoist.com/api/v1/tasks';
+  const res = await fetch(tasksUrl, {
     headers: { Authorization: `Bearer ${apiToken}` }
   });
   if (!res.ok) {
