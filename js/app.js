@@ -50,7 +50,7 @@ function handleResize() {
   initAll();
 }
 
-(async () => {
+async function startApp() {
   showLoading(true);
   try {
     await loadTodoistTasks(CONFIG.todoist.apiToken);
@@ -128,4 +128,21 @@ function handleResize() {
 
   loop();
   window.addEventListener("resize", handleResize);
-})();
+}
+
+if (CONFIG.todoist.apiToken) {
+  startApp();
+} else {
+  const overlay = document.getElementById('token-setup');
+  const input   = document.getElementById('token-input');
+  const btn     = document.getElementById('token-save');
+  overlay.classList.remove('hidden');
+  btn.addEventListener('click', () => {
+    const token = input.value.trim();
+    if (!token) return;
+    CONFIG.todoist.apiToken = token;
+    overlay.classList.add('hidden');
+    startApp();
+  });
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') btn.click(); });
+}

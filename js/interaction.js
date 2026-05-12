@@ -154,7 +154,7 @@ async function popBubble(d) {
   physicsStopTimer = setTimeout(() => fadeStopPhysics(CONFIG.physics.fadeDuration), 500);
 
   try {
-    await fetch(`/proxy/tasks/${d.id}/close`, {
+    await fetch(`https://api.todoist.com/api/v1/tasks/${d.id}/close`, {
       method: "POST",
       headers: { "Authorization": `Bearer ${CONFIG.todoist.apiToken}` }
     });

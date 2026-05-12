@@ -46,7 +46,7 @@ export function attachAddTask(apiToken, onSuccess) {
     if (due.value) body.due_date = due.value;
 
     try {
-      const res = await fetch("/proxy/tasks", {
+      const res = await fetch("https://api.todoist.com/api/v1/tasks", {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${apiToken}`,

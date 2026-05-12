@@ -32,7 +32,8 @@ export const CONFIG = {
   },
 
   todoist: {
-    apiToken: "93c30dd34608cc8a44da1c21729730617fa3277a"
+    get apiToken() { return localStorage.getItem('hs_todoist_token') ?? ''; },
+    set apiToken(v) { localStorage.setItem('hs_todoist_token', v); }
   },
 
   appearance: {
