@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+  <title>Headspace</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <button id="at-open-btn" class="ed-toggle">+ Task</button>
+
+  <div id="at-dialog" class="ed-dialog hidden">
+    <div class="ed-dialog-box">
+      <div class="ed-dialog-title">Add Task</div>
+
+      <input id="at-content" class="ed-dlg-name-input" type="text" placeholder="Task name…"/>
+
+      <div class="at-field">
+        <label class="at-label">Category</label>
+        <select id="at-category" class="at-select">
+          <option value="work">Work</option>
+          <option value="family">Family</option>
+          <option value="health">Health</option>
+          <option value="learning">Learning</option>
+          <option value="finance">Finance</option>
+          <option value="social">Social</option>
+          <option value="space">Space</option>
+          <option value="travel">Travel</option>
+          <option value="chores">Chores</option>
+          <option value="community">Community</option>
+        </select>
+      </div>
+
+      <div class="at-field">
+        <label class="at-label">Priority</label>
+        <select id="at-priority" class="at-select">
+          <option value="4">P1 — Urgent</option>
+          <option value="3">P2 — High</option>
+          <option value="2">P3 — Medium</option>
+          <option value="1" selected>P4 — Normal</option>
+        </select>
+      </div>
+
+      <div class="at-field">
+        <label class="at-label">Due date</label>
+        <input id="at-due" class="at-date" type="date"/>
+      </div>
+
+      <p id="at-status" class="at-status"></p>
+
+      <div class="ed-dlg-btns">
+        <button id="at-cancel" class="ed-btn">Cancel</button>
+        <button id="at-submit" class="ed-btn ed-btn-accent">Add</button>
+      </div>
+    </div>
+  </div>
+
+  <h1>Headspace</h1>
+  <p class="subtitle">A map of what occupies your mind</p>
+  <p id="status" class="status-msg"></p>
+  <canvas id="c"></canvas>
+  <div class="legend">
+    <div class="legend-item"><span class="legend-dot" style="background:#eaa9a9"></span>Family</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#edd39b"></span>Work</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#cca8bb"></span>Health</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#acaddd"></span>Learning</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#e3e490"></span>Finance</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#beecb1"></span>Social</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#92c6d3"></span>Space</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#aad5cc"></span>Travel</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#8f8f8f"></span>Chores</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#92c8a4"></span>Community</div>
+  </div>
+
+  <div hidden>
+    <label class="ctrl-label">
+      <span>Expansion</span>
+      <input type="range" id="expand" min="1" max="2.5" step="0.05" value="1.75"/>
+      <span id="expand-val">1.75</span>
+    </label>
+    <label class="ctrl-label">
+      <span>Trim</span>
+      <input type="range" id="trim" min="0.0" max="0.5" step="0.01" value="0.24"/>
+      <span id="trim-val">0.24</span>
+    </label>
+    <label class="ctrl-label">
+      <span>Contrast</span>
+      <input type="range" id="contrast" min="0.5" max="2" step="0.05" value="1"/>
+      <span id="contrast-val">1.00</span>
+    </label>
+    <label class="ctrl-label">
+      <span>Floor</span>
+      <input type="range" id="floor" min="0" max="10" step="0.5" value="8"/>
+      <span id="floor-val">8.0</span>
+    </label>
+  </div>
+  <div class="controls">
+    <label class="ctrl-label">
+      <span>Attraction</span>
+      <input type="range" id="attraction" min="0" max="0.02" step="0.001" value="0.004"/>
+      <span id="attraction-val">0.004</span>
+    </label>
+    <label class="ctrl-label">
+      <span>Repulsion</span>
+      <input type="range" id="repulsion" min="0" max="0.02" step="0.001" value="0.004"/>
+      <span id="repulsion-val">0.004</span>
+    </label>
+  </div>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
